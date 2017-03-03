@@ -1,12 +1,14 @@
-#version: "1"
+version: "2"
 
 services:
   bpmtomcat:
     build: ./docker-camunda-bpm-platform
-    #ports:
-      #- "8080:8080"
+    ports:
+      - "8080"
     depends_on:
       - bpmdb
+    networks:
+      - bpm
     environment:
       - WAIT_FOR=bpmdb:5432
       - DB_DRIVER=org.postgresql.Driver
@@ -21,3 +23,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    networks:
+      - bpm
+networks:
+  bpm:
