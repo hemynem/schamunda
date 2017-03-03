@@ -37,4 +37,4 @@ COPY wars/ /camunda/webapps
 
 EXPOSE 8080
 
-CMD ["/usr/local/bin/configure-and-run.sh"]
+CMD /usr/local/bin/wait-for-connection.sh && /usr/local/bin/configure-and-run.sh
