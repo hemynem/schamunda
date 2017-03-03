@@ -1,0 +1,10 @@
+# start camunda container
+sudo docker run -d --name camunda_1 -p 8080:8080 --link vigilant_volhard:db \
+           -e DB_DRIVER=org.postgresql.Driver \
+           -e DB_URL=jdbc:postgresql://db:5432/postgres \
+           -e DB_USERNAME=postgres \
+           -e DB_PASSWORD=postgres \
+	oc/schamunda
+
+# start postgres container
+sudo docker run --name camunda_postgres -p 8080:8080 --link postgresql:db \ -e DB_DRIVER=org.postgresql.Driver \ -e DB_URL=jdbc:postgresql://db:32771/process-engine \ -e DB_USERNAME=camunda \ -e DB_PASSWORD=camunda \ oc/schamunda
